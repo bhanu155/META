@@ -1,0 +1,95 @@
+@media only screen and (max-width: 768px) {
+	html, body{
+		height:50%;
+	}
+	.full-height{
+		height:50%;
+	}
+	.creditArea{
+		font-size:2em;
+	}
+	.details p a{
+		font-size:2em;
+	}
+	
+}
+
+
+html, body {
+  height: 100%;
+}
+.full-height {
+  height: 100%;
+}
+
+a {
+margin-right: 0.5em;
+font-family: 'Baloo Da 2', cursive;
+}
+.creditArea{
+  margin:auto;
+  padding:5em;
+  background-color: ghostwhite;
+  width:100%;
+}
+.nbutton {
+  padding-right: 1em; 
+  float: right;
+}
+.rounded-circle{
+  
+  border-radius: 150px;
+  -webkit-border-radius: 150px;
+  -moz-border-radius: 150px;
+  background: url(http://link-to-your/image.jpg) no-repeat;
+  box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+  -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+p {
+text-align: center;
+padding-top: 2.5em; 
+color: white;
+font-family: 'Baloo Da 2', cursive;
+}
+h6{
+  margin-left: 3em;
+  font-family: 'Baloo Da 2', cursive;
+}
+.projectDisplay {
+  background-color:#3D3D3D; 
+  padding:5em;
+
+}
+.details{
+  margin:1em;
+}
+.details p{
+  text-align:center;
+  margin:auto;
+  padding-top:0;
+  color:#3D3D3D;
+  font-family: 'Baloo Da 2', cursive;
+}
+.details p a{
+  color:navy;
+  font-size:1em;
+  font-weight:700;
+  margin:auto;
+  text-decoration:none;
+}
+.rollNo{
+  font-weight:600;
+}
+
+.ml12 {
+  font-weight: 500;
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+}
+
+.ml12 .letter {
+  display: inline-block;
+  line-height: 1em;
+}

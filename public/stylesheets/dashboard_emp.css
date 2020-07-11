@@ -1,0 +1,77 @@
+#group {
+text-align: center;
+font-size:1.5em;
+}
+
+.card-header {
+	background-color: #476b6b;
+}
+
+#group-button{
+	background-color: #476b6b; 
+	margin-top: 0.7em; 
+	margin-bottom:0.7em;
+}
+
+#edit-button{
+	padding-left:1em; 
+	margin-left: 4em;
+	font-size:1.2em;
+}
+
+#icon{
+	margin-right:0.5em;
+}
+
+#card1{
+	box-shadow: 8px 8px 8px whitesmoke;
+}
+
+h1{
+	text-align: center; 
+	color: #3bb300;
+	margin-top: 0.5em;
+}
+
+hr{
+	border-width:1.5px; 
+	border-color:lightgray;
+}
+
+#card2{
+	box-shadow: 8px 8px 8px whitesmoke;
+}
+
+#module{
+	text-align: center; 
+	font-weight: bolder;
+	color:  #476b6b
+}
+
+#module-list{
+	margin-left:1em;
+	 color: #000033; 
+	 font-size:1.2em;
+}
+
+#card3{
+	box-shadow: 8px 8px 8px whitesmoke;
+}
+
+#skills {
+	text-align: center; 
+	font-weight: bolder;
+	 font-size:1.5em;
+	  color:  #476b6b
+}
+
+#skill-button {
+	border-radius: 50%; 
+	margin-left: 1em;
+}
+
+#skill-list{
+	margin-left:1em; 
+	color: #000033; 
+	font-size:1.2em;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap 4.4.1 css -->
+    <link rel="stylesheet" type="text/HTML" href="lib/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"> <!--font awesome-->
+	<!-- signup css -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/login_form.css">
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700,800&display=swap" rel="stylesheet">
+    
+    <!-- validation script -->
+    <!-- <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/login_form_validation.js"></script> -->
+   
+    <title>LOGIN</title>
+</head>
+<body>
+    
+    <form class="form-area" action="/login_employee" method="POST">
+		<div class="img-area">
+		     <img src="assets/avatar.png" alt="">
+		</div>
+
+        <h2>LOGIN AS EMPLOYEE</h2>
+        
+        <div class="input-group">
+            <label for="InputUsername">UNIQUE USER-ID</label><br>
+            <div class="wrapper">
+                <i class="far fa-user"></i>
+                <input name="username" type="text" class="form-control" placeholder="Ex: John123" id="InputUsername" required>
+                <div id="unameerror"></div>
+            </div>
+        </div>
+
+	    <div class="form-group">
+			<input class="btn btn-primary btn-block" type="submit" value="Login">
+		</div>
+	</form>
+</body>
+</html>

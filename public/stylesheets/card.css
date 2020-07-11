@@ -1,0 +1,24 @@
+.ui.cards{
+	margin: auto;
+	background-position: center;
+}
+.ui.cards .card{
+	border:0.5px solid black;
+	align-items: center;
+	width:inherit;
+    width: -webkit-fill-available;
+}
+.ui.cards .card:hover{
+	transform: scale(1.03);
+	transition: transform 0.2s;
+}
+.ui.bottom.attached.button{
+	background: rgb(243, 243, 243);
+	color:blue;
+}
+.add.icon{
+	color: blue;
+}
+.header{
+	text-align: center;
+}

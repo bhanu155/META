@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>project -> <%=project.projectName.toUpperCase() %></title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+		integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700,800&display=swap" rel="stylesheet" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css" />
+
+
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+	
+	
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+	
+	<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+	<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+	
+	<link rel="stylesheet" href="/stylesheets/project_info.css">
+	<link rel="stylesheet" href="/stylesheets/kanban.css">
+	<link rel="stylesheet" href="/stylesheets/card.css">
+	<link rel="stylesheet" href="/stylesheets/progress.css">
+	
+	
+
+
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: azure;">
+    <a class="navbar-brand" href="/">M-E-T-A</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto ml-lg-5">
+        <li class="nav-item">
+          <a href="/dashboard">
+            <button class="btn btn-md btn-outline-success my-2 my-sm-0" type="submit">Dashboard</button>
+          </a>
+        </li>
+      </ul>
+	<% if(!currentUser){ %>
+      <ul class="navbar-nav navbar-right">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" style="font-weight:500;color:black;">
+            MANAGER
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/register_manager">Sign-Up &nbsp&nbsp<i class="fas fa-user-plus"></i></a>
+            <a class="dropdown-item" href="/login_manager">Login &nbsp&nbsp<i class="fas fa-sign-in-alt"></i></a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item disabled" href="#">Demo &nbsp&nbsp<i class="fas fa-snowman"></i></a>
+            <a class="dropdown-item disabled" href="#">Go Premium &nbsp&nbsp<i class="fas fa-user-astronaut"></i></a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" style="font-weight:500;color:black;">
+            EMPLOYEE
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/register_employee">Register &nbsp&nbsp<i class="fas fa-user-plus"></i></a>
+            <a class="dropdown-item" href="/login_employee">Login &nbsp&nbsp<i class="fas fa-sign-in-alt"></i></a>
+          </div>
+        </li>
+      </ul>
+	<% }else{ %>
+		<ul class="navbar-nav navbar-right">
+        	<li class="nav-item">
+          		<a href="/logout">
+        			<button class="btn btn-md btn-outline-warning my-2 my-sm-0">Logout</button>
+          		</a>
+        	</li>
+      	</ul>	
+	<%}%>
+
+    </div>
+  </nav>
+	<%
+		//logic for project state prediction here
+		var backlogPer = ( project.backlogModules / project.numberOfModules )*100;
+		var progressPer = ( project.inProgressModules / project.numberOfModules )*100;
+		var finishedPer = ( project.finishedModules / project.numberOfModules ) * 100;
+		var teamMem =0;
+		modules.forEach((module)=>{
+			teamMem += module.staffCurr ;
+		});
+		//modules, project
+	%>
+	<!-- project information top -->
+	<div id="projectInfo" style="align-items: center;padding: auto;margin:auto;">
+		<div class="jumbotron">
+			<!-- project name -->
+			<div class="row">
+				<div id="top" class="alert alert-secondary w-100" role="alert">
+					<h4><%= project.projectName.toUpperCase() %></h4>
+				</div>
+			</div>
+			<!-- data -->
+			<div class="row alert alert-secondary">
+				<!-- static data -->
+				<div class="row d-flex justify-content-around">
+					<!-- start date -->
+					<div class="col-md-6 w-100">
+						<span style="text-align:left; font-size:1.5em"><strong><i class="far fa-calendar-alt"
+									style="color: black;">&nbsp&nbsp START-DATE(m/d/y): <%= project.startDate.toLocaleString().slice(0,9) %></i></strong></span>
+					</div>
+					<!-- deadline -->
+					<div class="col-md-6">
+						<span style="float: right; font-size: 1.5em;"><strong><i class="far fa-calendar-check"
+									style="color: black;">&nbsp&nbsp DEADLINE(m/d/y): <%= project.deadline.toLocaleString().slice(0,9) %></i></strong></span>
+					</div>
+					<!-- remaining time -->
+					<%
+					var today = new Date().toLocaleDateString('en-US');
+					var dl = project.deadline.toLocaleDateString('en-US');
+					function parseDate(str) {
+						var mdy = str.split('/');
+						return new Date(mdy[2], mdy[0]-1, mdy[1]);
+					}
+					function datediff(first, second) {
+						// Take the difference between the dates and divide by milliseconds per day.
+						// Round to nearest whole number to deal with DST.
+						return Math.round((second-first)/(1000*60*60*24));
+					}
+
+					var dd = datediff(parseDate(today), parseDate(dl)) // date difference
+					%>
+					<div class="col-md-6">
+						<span style="text-align:left; font-size:1.5em;"><strong><i class="far fa-hourglass"
+									style="color: black;">&nbsp&nbsp TIME-REMAINING: <%= dd %> DAYS</i></strong></span>
+					</div>
+					<!-- staff size -->
+					<div class="col-md-6">
+						<span style="float: right; font-size:1.5em;"><strong><i class="fas fa-users"
+									style="color: black;">&nbsp&nbsp TEAM-SIZE: <%= teamMem %></i></strong></span>
+					</div>
+				</div>
+				<!-- state -->
+				<div class="row">
+					<!-- project state -->
+					<!-- LOGIC FOR PROJECT STATE CALCULATION -->
+					<div id="state" class="alert alert-secondary" role="alert">
+						<h1>PROJECT STATE: On-Track</h1>
+					</div>
+				</div>
+				<br>
+				<!-- multiprogress bar -->
+				<div class="row w-100 my-3">
+					<div class="col-12">
+						<div id="multiBar">
+							<div class="progress" style="height:2em;">
+								<div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+									id="finishedProject" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+								<div class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+									id="inProgressProject" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- options -->
+			<div style="padding-top:0.5em, padding-bottom:0.5em;">
+			<div class="row alert alert-secondary d-flex align-items-center justify-content-around">
+				
+					<div class="col-md-6 col-lg-3 align-items-center justify-content-around" style="text-align:center;">
+						<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#newModuleForm">
+							<i class="fas fa-plus">&nbsp&nbsp NEW MODULE</i>
+						</button>
+					</div>
+					<div class="col-md-6 col-lg-3 align-items-center justify-content-around" style="text-align:center;">
+						<button class="btn btn-outline-info" data-toggle="modal" data-target="#editProjectForm">
+							<i class="far fa-edit">&nbsp&nbsp EDIT PROJECT</i>
+						</button>
+					</div>
+					<% if(project.archived==false){ %>
+					<div class="col-md-6 col-lg-3 align-items-center justify-content-around" style="text-align:center;">		
+						<form action="/archiveProject/<%= project._id %>?_method=PUT" method="POST">
+							<button type="submit" class="btn btn-outline-warning">
+								<i class="fas fa-user-friends">&nbsp&nbsp ARCHIVE PROJECT</i>
+							</button>
+						</form>
+					</div>
+					<% } %>
+					<div class="col-md-6 col-lg-3 align-items-center justify-content-around" style="text-align:center;">
+						<form action="/projects/<%= project._id %>?_method=DELETE" method="POST">
+							<button type="submit" class="btn btn-outline-danger">
+								<i class="far fa-trash-alt">&nbsp&nbsp DELETE PROJECT</i>
+							</button>
+						</form>
+						
+					</div>
+				
+			</div>
+			</div>
+		</div> <!-- Jumbotron ends here -->
+	</div> <!-- Project head ends here -->
+
+	<!-- module kanban -->
+	<div class="row" id="kanban-body">
+		<div class="col-md-4">
+			<div id="backlog">
+				<p><i style="color:#FFB300;" class="fas fa-clipboard-list"></i>&nbsp&nbsp&nbsp&nbsp BACKLOG</p>
+			</div>
+			<!-- backlog cards here -->
+			<div id="backlogBlock">
+				<% modules.forEach((module)=>{ %>
+					<% if( String(module.parentProject.id) == String(project._id) && module.status== 'backlog' ) {%>
+						<%	
+							var today = new Date().toLocaleDateString('en-US');
+							var dl = module.dueDate.toLocaleDateString('en-US');
+							function parseDate(str) {
+								var mdy = str.split('/');
+								return new Date(mdy[2], mdy[0]-1, mdy[1]);
+							}
+							function datediff(first, second) {
+								// Take the difference between the dates and divide by milliseconds per day.
+								// Round to nearest whole number to deal with DST.
+								return Math.round((second-first)/(1000*60*60*24));
+							}
+				
+							var dd = datediff(parseDate(today), parseDate(dl)) // date difference	
+						%>
+						<div class="ui cards">
+							<div class="card">
+								<div class="content">
+									<div class="header"><a href="/modules/<%= module._id %>"><%= module.moduleName.toUpperCase() %></a></div>
+									<hr>
+									<div class="description">
+										<em><strong>DUE:</strong></em><span> <%= module.dueDate.toLocaleDateString() %> [<%= dd %> days remaining] </span>
+									</div>
+								</div>
+								<form action="/start_module/<%= module._id %>/<%= project._id %>?_method=PUT" method="POST" >
+									<button type="submit" class="ui bottom attached button">
+										<i style="color:#FFB300;" class="fas fa-rocket"></i>
+										<span>START</span>
+									</button>
+								</form>
+							</div>
+						</div>
+				<% }}); %>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div id="in-progress">
+				<p><i style="color:#29B6F6;" class="fas fa-tasks"></i>&nbsp&nbsp&nbsp&nbsp IN-PROGRESS</p>
+			</div>
+			<!-- progress cards here -->
+			<div id="progressBlock">
+				<% var pmodules = modules %>
+				<% modules.forEach((module)=>{ %>
+					<% if( String(module.parentProject.id) == String(project._id) && module.status== 'progress' ) {%>
+						<%	
+							var today = new Date().toLocaleDateString('en-US');
+							var dl = module.dueDate.toLocaleDateString('en-US');
+							function parseDate(str) {
+								var mdy = str.split('/');
+								return new Date(mdy[2], mdy[0]-1, mdy[1]);
+							}
+							function datediff(first, second) {
+								// Take the difference between the dates and divide by milliseconds per day.
+								// Round to nearest whole number to deal with DST.
+								return Math.round((second-first)/(1000*60*60*24));
+							}
+				
+							var dd = datediff(parseDate(today), parseDate(dl)) // date difference	
+						%>
+						<div class="ui cards">
+							<div class="card">
+								<div class="content">
+									<div class="header"><a href="/modules/<%= module._id %>"><%= module.moduleName.toUpperCase() %></a></div>
+									<hr>
+									<div class="description">
+										<em><strong>DUE:</strong></em><span> <%= module.dueDate.toLocaleDateString() %> [<%= dd %> days remaining] </span>
+									</div>
+									<!-- progress bar here -->
+									<div>
+										<div class="progress">
+											<div id="myProgress">
+												<div id="myBar_<%= String(module._id) %>">0%</div>	
+											</div>
+										</div>
+									</div>
+								</div>
+								<form action="/finish_module/<%= module._id %>/<%= project._id %>?_method=PUT" method="POST" >
+									<button type="submit" class="ui bottom attached button">
+										<i style="color:#29B6F6;" class="fas fa-clipboard-check"></i>
+										<span>FINISH</span>
+									</button>
+								</form>
+							</div>
+						</div>
+				<% }}); %>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div id="finished">
+				<p><i style="color:#8BC34A;" class="fas fa-check-circle"></i>&nbsp&nbsp&nbsp&nbsp FINISHED</p>
+			</div>
+			<!-- finished cards here -->
+			<div id="finishedBlock">
+				<% modules.forEach((module)=>{ %>
+					<% if( String(module.parentProject.id) == String(project._id) && module.status== 'finished' ) {%>
+						<%	
+							var today = new Date().toLocaleDateString('en-US');
+							var fd = module.finishDate.toLocaleDateString('en-US');
+							function parseDate(str) {
+								var mdy = str.split('/');
+								return new Date(mdy[2], mdy[0]-1, mdy[1]);
+							}
+							function datediff(first, second) {
+								// Take the difference between the dates and divide by milliseconds per day.
+								// Round to nearest whole number to deal with DST.
+								return Math.round((second-first)/(1000*60*60*24));
+							}
+				
+							var dd = datediff(parseDate(fd), parseDate(today)) // date difference	
+						%>
+						<div class="ui cards">
+							<div class="card">
+								<div class="content">
+									<div class="header"><a href="/modules/<%= module._id %>"><%= module.moduleName.toUpperCase() %></a></div>
+									<hr>
+									<div class="description">
+										<em><strong>FINISHED:</strong></em><span> <%= module.finishDate.toLocaleDateString() %> [<%= dd %> days ago] </span>
+										<br>
+										<em><strong>DEADLINE INDEX:</strong></em><span> <%= module.deadlineIndex %> </span>
+									</div>
+								</div>
+							</div>
+						</div>
+				<% }}); %>
+			</div>
+		</div>
+	</div>
+	<!--module kanban ends here-->
+
+	<!-- progress bars script -->
+	<script src="/scripts/project_info_progress_bar.js"></script>
+	<%
+		var pmodules=[];
+		modules.forEach((module)=>{
+			if(module.status=='progress' && String(module.parentProject.id) == String(project._id)){
+				pmodules.push({
+					_id:String(module._id),
+					status:'progress',
+					tasksTodo: module.tasksTodo,
+					tasksFinished: module.tasksFinished
+				});
+			}
+		});	 
+	%>
+	<script>
+		set_multibar(<%= Number(finishedPer) %>, <%= Number(progressPer) %>);
+		pModuleBar(<%= pmodules %>);
+	</script>
+	
+	<!-- Edit Project Pop Up form - Modal -->
+	<div class="modal fade" id="editProjectForm" tabindex="-1" role="dialog"
+		aria-labelledby="editProjectFormTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="text-align: center; padding-left: 7em;">
+					<h5 class="modal-title" id="editProjectModalTitle" style="color: cadetblue; font-size: 1.5em;">
+						<strong>EDIT PROJECT</strong></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					
+				<!-- New Project Form - Pop up /create_project -->
+					<form action="/projects/<%=project._id%>?_method=PUT" method="POST">
+						<div class="form-group" required>
+							<label for="inputProjectName" style="font-weight: bold; font-size:1.1em;" required>Project Name
+							</label>
+							<input type="text" class="form-control" id="inputProjectName" name="projectName" value="<%=project.projectName%>" required>
+						</div>
+						<div class="form-group">
+							<label for="inputDeadline" style="font-weight: bold; font-size:1.1em;">Deadline</label>
+							<input name="deadlineDate" id="inputDeadline" width="465" value="<%= project.deadline.toLocaleDateString() %>" required>
+							<script>
+								$('#inputDeadline').datepicker({
+									uiLibrary: 'bootstrap4'
+								}); 
+							</script>
+						</div>
+
+						<div class="text-center">
+							<button type="submit" class="btn btn-outline-light">
+								<i class="fas fa-plus" style="font-size: 2em; color: cadetblue;"></i>
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- new module form pop up ->  Modal -->
+  	<div class="modal fade" id="newModuleForm" tabindex="-1" role="dialog" aria-labelledby="newModuleFormTitle"
+    	aria-hidden="true">
+    	<div class="modal-dialog modal-dialog-centered" role="document">
+      	<div class="modal-content">
+        	<div class="modal-header" style="text-align: center; padding-left: 7em;">
+          		<h5 class="modal-title" id="newModuleForm" style="color: #85144b; font-size: 1.5em;"><strong>NEW MODULE</strong></h5>
+          		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            		<span aria-hidden="true">&times;</span>
+          		</button>
+        	</div>
+        	<div class="modal-body">
+         		<form action="/modules" method="POST">
+					<input type="hidden" id="parentProject_id" name="parentProject_id" value="<%= project._id %>">
+					<input type="hidden" id="parentProjectName" name="parentProjectName" value="<%= project.projectName %>">
+					<!-- MODULE NAME -->
+            		<div class="form-group">
+              			<label for="moduleName" style="font-weight: bold; font-size:1.1em;" required>Module Name</label>
+              			<input type="text" class="form-control" id="moduleName" name="moduleName" required>
+           			</div>
+            		<!-- DUE DATE -->
+            		<div class="form-group">
+              			<label for="dueDate" style="font-weight: bold; font-size:1.1em;">Due Date</label>
+              			<input id="dueDatePicker" width="465" name="dueDate" required>
+              			<script>
+                			$('#dueDatePicker').datepicker({
+                  				uiLibrary: 'bootstrap4'
+                			}); 
+              			</script>
+            		</div>
+					<!-- STAFF REQUIRED -->
+					<div class="form-group" required>
+              			<label for="staffRequired" style="font-weight: bold; font-size:1.1em;" required>Staff Required</label>
+              			<input type="number" class="form-control" id="staffRequired" name="staffRequired" value="0" required>
+            		</div>
+					<!-- SUBMIT BUTTON -->
+            		<div class="text-center">
+              			<button type="submit" class="btn btn-outline-light">
+                			<i class="fas fa-plus" style="font-size: 2em; color: #85144b;"></i>
+              			</button>
+            		</div>
+          		</form>
+        	</div>
+      	</div>
+		</div>
+  	</div>
+</body>
+
+</html>

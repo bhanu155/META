@@ -1,0 +1,90 @@
+#kanban-body{
+	margin:auto;
+	margin-bottom:2em;
+	padding:auto;
+	padding-top:0;
+}
+#backlog
+{	
+	box-shadow: 3px 0.2em 3px 0 gray, -0.4em 0 0.4em white;
+	border:1px solid whitesmoke;
+	border-radius:15px;
+	margin:auto;
+	margin-top:1em;
+	height:2.5em;
+	color:black;
+	text-align:center;
+	font-size:2em;
+	font-family: 'Marker Felt', fantasy;
+	padding:auto;
+	padding-top:0.5em;
+
+}
+#in-progress
+{
+	box-shadow: 3px 0.2em 3px 0 gray, -0.4em 0 0.4em white;
+	border:1px solid whitesmoke;
+	border-radius:15px;
+	margin:auto;
+	margin-top:1em;
+	height:2.5em;
+	color:black;
+	text-align:center;
+	font-size:2em;
+	font-family: 'Marker Felt', fantasy;
+	padding:auto;
+	padding-top:0.5em;
+	
+	
+}
+#finished
+{
+	box-shadow: 3px 0.2em 3px 0 gray, -0.4em 0 0.4em white;
+	border:1px solid whitesmoke;
+	border-radius:15px;
+	margin:auto;
+	margin-top:1em;
+	height:2.5em;
+	color:black;
+	text-align:center;
+	font-size:2em;
+	font-family: 'Marker Felt', fantasy;
+	padding:auto;
+	padding-top:0.5em;
+	
+	
+}
+#backlogBlock
+{
+	border-top: 3px solid #FFB300;
+	border-bottom: 3px solid #FFB300;
+	min-height:2em;
+	align-items: center;
+	text-align:center;
+	margin-top:2em;
+	border-radius:15px;
+	box-shadow: 3px 0.2em 3px 0 gray, -0.4em 0 0.4em white;
+}
+#progressBlock
+{
+	border-top: 3px solid #29B6F6;
+	border-bottom: 3px solid #29B6F6;
+	min-height:2em;
+	align-items: center;
+	text-align:center;
+	margin-top:2em;
+	border-radius:15px;
+	box-shadow: 3px 0.2em 3px 0 gray, -0.4em 0 0.4em white;	
+}
+#finishedBlock
+{
+	border-top: 3px solid #8BC34A;
+	border-bottom: 3px solid #8BC34A;
+	min-height:2em;
+	align-items: center;
+	text-align:center;
+	margin-top:2em;
+	border-radius:15px;
+	box-shadow: 3px 0.2em 3px 0 gray, -0.4em 0 0.4em white;	
+}
+

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap 4.4.1 css -->
+    <link rel="stylesheet" type="text/HTML" href="lib/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"> <!--font awesome-->
+	<!-- signup css -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/signup_form.css">
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700,800&display=swap" rel="stylesheet">
+
+    <!-- form_validation -->
+    <!-- <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/signup_form_validation.js"></script> -->
+
+    <title>SIGNUP</title>
+</head>
+<body>
+    
+    <form action="/register_manager" method="POST" class="form-area">
+		<div class="img-area">
+		     <img src="assets/avatar.png" alt="">
+		</div>
+
+        <h2>SIGN UP AS MANAGER</h2>
+        
+        <div class="input-group">
+            <label for="InputUsername">USERNAME</label><br>
+            <div class="wrapper">
+                <i class="far fa-user"></i>
+                <input name="username" type="text" class="form-control" placeholder="Ex: John123" id="InputUsername" required>
+                <div id="usererror"></div>
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <label for="InputEmail">E-MAIL</label><br>
+            <div class="wrapper">
+                <i class="far fa-envelope"></i>
+                <input name="email" type="email" class="form-control" placeholder="Ex: abc123@xyz.com" id="InputEmail" required>  
+                <div id="emailerror"></div>
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <label for="InputPassword">PASSWORD</label><br>
+            <div class="wrapper">
+                <i class="fas fa-key"></i>
+                <input name="password" type="password" class="form-control" placeholder="Enter Password" id="InputPassword" required>        
+                <div id="passerror"></div>
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <label for="InputPasswordConfirmation">CONFIRM PASSWORD</label><br>
+            <div class="wrapper">
+                <i class="fas fa-key"></i>
+                <input name="confirmPassword" type="password" class="form-control" placeholder="Enter Password again" id="InputPasswordConfirmation" required>
+                <div id="cpasserror"></div>
+            </div>
+        </div>
+        
+	    <div class="form-group">
+			<input class="btn btn-primary btn-block" type="submit" value="Sign Up">
+		</div> 
+	</form>
+</body>
+</html>

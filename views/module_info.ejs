@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>module -> <%= module.moduleName.toUpperCase() %> </title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+	
+	<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+	<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+	
+	<link rel="stylesheet" href="stylesheets/module_info.css">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: azure;">
+    <a class="navbar-brand" href="/">M-E-T-A</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto ml-lg-5">
+        <li class="nav-item">
+          <a href="/dashboard">
+            <button class="btn btn-md btn-outline-success my-2 my-sm-0" type="submit">Dashboard</button>
+          </a>
+        </li>
+      </ul>
+	<% if(!currentUser){ %>
+      <ul class="navbar-nav navbar-right">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" style="font-weight:500;color:black;">
+            MANAGER
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/register_manager">Sign-Up &nbsp&nbsp<i class="fas fa-user-plus"></i></a>
+            <a class="dropdown-item" href="/login_manager">Login &nbsp&nbsp<i class="fas fa-sign-in-alt"></i></a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item disabled" href="#">Demo &nbsp&nbsp<i class="fas fa-snowman"></i></a>
+            <a class="dropdown-item disabled" href="#">Go Premium &nbsp&nbsp<i class="fas fa-user-astronaut"></i></a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" style="font-weight:500;color:black;">
+            EMPLOYEE
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/register_employee">Register &nbsp&nbsp<i class="fas fa-user-plus"></i></a>
+            <a class="dropdown-item" href="/login_employee">Login &nbsp&nbsp<i class="fas fa-sign-in-alt"></i></a>
+          </div>
+        </li>
+      </ul>
+	<% }else{ %>
+		<ul class="navbar-nav navbar-right">
+        	<li class="nav-item">
+          		<a href="/logout">
+        			<button class="btn btn-md btn-outline-warning my-2 my-sm-0">Logout</button>
+          		</a>
+        	</li>
+      	</ul>	
+	<%}%>
+
+    </div>
+  </nav>
+<div class="card">
+	<div class="card-body"> 
+		<div class="row">
+			<div class="column col-md-6">
+				<div class="card">
+					<div class="card-body">
+						<div class="row alert alert-success" style="text-align: center;">
+							<div calss="col-6" style="width:50%;text-align:center;">
+								<h4><%= module.moduleName.toUpperCase() %></h4>
+							</div>
+							<div class="col-6 row">
+								<div class="col-6">
+									<button type="submit" class="btn btn-outline-warning" data-toggle="modal" data-target="#editModuleForm" style="width:max-content;">
+										<emp><i class="far fa-edit">&nbsp&nbsp EDIT</i></emp>
+									</button>
+								</div>
+								<div class="col-6">
+									<form action="/modules/<%= module._id %>?_method=DELETE" method="POST">
+										<button type="submit" class="btn btn-outline-danger" style="width:max-content;">
+											<i class="far fa-trash-alt">&nbsp&nbsp DELETE</i>
+										</button>
+									</form>
+								</div>
+								
+							</div>
+						</div>
+						
+						<span>
+							<em><i id="icon" class="fas fa-tasks"></i>&nbsp&nbsp Status: <%= module.status.toUpperCase() %></em>
+						</span>
+						<hr>
+						<span>
+							<em><i id="icon" class="far fa-clock"></i>&nbsp&nbsp Due: <%= module.dueDate.toLocaleDateString('en-US') %></em>
+						</span>
+						<hr>
+						<form action="/moduleTaskUpdate/<%= module._id %>?_method=PUT" method="POST">
+							<input type="number" name="done" placeholder="Done" value="<%= module.tasksFinished %>" style="width:20%;">
+							&nbsp / &nbsp
+							<input type="number" name="total" placeholder="Total" value="<%= module.tasksTodo %>" style="width:20%;">
+							&nbsp&nbsp&nbsp
+							<button type="submit" class="btn btn-outline-success btn-sm" style="width:max-content;">
+								<i class="far fa-check-square">&nbsp&nbsp UPDATE</i>
+							</button>
+						</form>
+						<hr>
+						<span>
+							<em><i id="icon" class="fas fa-user-tie">&nbsp&nbsp<%= parentProject.author.username %></i></em>
+						</span>
+					</div>
+				</div>
+			</div>
+
+				<div class="column col-md-6">
+					<div class="card">
+						<div class="card-header" style="margin:0">
+							<h4 class="alert alert-info row" style="text-align: center;margin:0;">
+								<div class="col-8">
+									<i class="fas fa-users" style="margin-right:0.5em;">&nbsp&nbsp&nbsp TEAM</i>
+									<emp>
+										( <%= module.staffCurr %> / <%= module.staffReq %> )
+									</emp>
+								</div>
+								<div class="col-4">
+									<a href="/editTeam/<%= module._id %>">
+										<button class="btn btn-outline-warning" style="width:max-content;">
+											<i class="fas fa-user-friends">&nbsp&nbsp EDIT TEAM</i>
+										</button>
+									</a>
+								</div>
+							</h4>
+						</div>
+						<div class="card-body">
+							<table class="table table-bordered">
+  								<thead>
+    								<tr>
+      									<th id="head" scope="col">NAME</th>
+      									<th id="head" scope="col">EMAIL</th>
+     									<th id="head" scope="col">Credit</th>
+    								</tr>
+  								</thead>
+								<tbody>
+   									<tr>
+   										<td>Mark</td>
+   										<td>abc@gmail.com</td>
+   										<td>329</td>
+  									</tr>
+    								<tr>
+      									<td>Jacob</td>
+      									<td>jacob@gmail.com</td>
+      									<td>556</td>
+    								</tr>
+    								<tr>
+      									<td>John</td>
+      									<td>john@gmail.com</td>
+      									<td>786</td>
+    								</tr>
+    							</tbody>
+							</table>	
+    					</div>		
+					</div>
+				</div>
+
+		</div>
+	</div>
+</div>
+	
+<!-- edit module form pop up ->  Modal -->
+  	<div class="modal fade" id="editModuleForm" tabindex="-1" role="dialog" aria-labelledby="editModuleFormTitle"
+    	aria-hidden="true">
+    	<div class="modal-dialog modal-dialog-centered" role="document">
+      	<div class="modal-content">
+        	<div class="modal-header" style="text-align: center; padding-left: 7em;">
+          		<h5 class="modal-title" id="editModuleForm" style="color: #85144b; font-size: 1.5em;"><strong>EDIT MODULE</strong></h5>
+          		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            		<span aria-hidden="true">&times;</span>
+          		</button>
+        	</div>
+        	<div class="modal-body">
+         		<form action="/modules/<%= module._id %>?_method=PUT" method="POST">
+					<!-- MODULE NAME -->
+            		<div class="form-group">
+              			<label for="moduleName" style="font-weight: bold; font-size:1.1em;" required>Module Name</label>
+              			<input type="text" class="form-control" id="moduleName" name="moduleName" value="<%= module.moduleName %>" required>
+           			</div>
+            		<!-- DUE DATE -->
+            		<div class="form-group">
+              			<label for="dueDate" style="font-weight: bold; font-size:1.1em;">Due Date</label>
+              			<input id="dueDatePicker" width="465" name="dueDate" value="<%= module.dueDate.toLocaleDateString('en-US') %>" required>
+              			<script>
+                			$('#dueDatePicker').datepicker({
+                  				uiLibrary: 'bootstrap4'
+                			}); 
+              			</script>
+            		</div>
+					<!-- STAFF REQUIRED -->
+					<div class="form-group" required>
+              			<label for="staffRequired" style="font-weight: bold; font-size:1.1em;" required>Staff Required</label>
+              			<input type="number" class="form-control" id="staffRequired" name="staffRequired" value="<%= module.staffReq %>" required>
+            		</div>
+					<!-- SUBMIT BUTTON -->
+            		<div class="text-center">
+              			<button type="submit" class="btn btn-outline-light">
+                			<i class="fas fa-plus" style="font-size: 2em; color: #85144b;"></i>
+              			</button>
+            		</div>
+          		</form>
+        	</div>
+      	</div>
+		</div>
+  	</div>
+</body>
+</html>
