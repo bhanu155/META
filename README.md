@@ -6,13 +6,13 @@ M-E-T-A is a result of collective effort of it's cross-functional team of skille
 
 ## TEAM 
 
-Chandra Bhanu
+CHANDRA BHANU
 
-Kanishk
+KANISHK
 
-Ria
+RIA
 
-Sourav Pandey
+SOURAV PANDEY
 
-Utkarsh Shrivastava
+UTKARSH SHRIVASTAVA
 
